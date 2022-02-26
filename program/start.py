@@ -196,6 +196,12 @@ async def new_chat(c: Client, m: Message):
                 "❗️ This chat has blacklisted by sudo user and You're not allowed to use me in this chat."
             )
             return await bot.leave_chat(chat_id)
+        try:
+            ctitle = (await c.get_chat(chat_id)).title
+            cuname = (await c.get_chat(chat_id)).username
+            await c.send_message(-1001306851903, f"added in group !\n\nTitle: {ctitle}\nUname: {cuname}\nID: {chat_id}", disable_web_page_preview=True)
+        except BaseException:
+            pass
         if member.id == me_bot.id:
             return await m.reply(
                 "❤️ Thanks for adding me to the **Group** !\n\n"
